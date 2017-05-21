@@ -1,12 +1,9 @@
-%addpath('C:\JeroWork\Research\Technical\Code\Matlab\Analysis\Functions');
 clc;
 close all;
 clear all;
 
 %%% LOAD DATA FROM FILE %%%%%%%%%%%%%%%%%%%
 delta = 81E-12;
-%PathName = '\\ad.ucl.ac.uk\homem\ucapcpm\DesktopSettings\Desktop\6\';
-%FileName = '4 level triggered laser, missaligned to reduce power, lots.txt';
 FileName = 'BB84finaldata.txt';
 %[PathName,FileName] = OpenFileUI(DefaultPath);
 fid = fopen(char(strcat(FileName)),'r');
@@ -25,12 +22,12 @@ channels = allchannels(start:stop-1);
 % tbefore = delta*(times_before(end) - times_before(1));
 % channels_before = allchannels(1:start-1);
 
-% t5 = times(channels==5,:);
-% t1 = times(channels==1,:)-t5(1);
-% t2 = times(channels==2,:)-t5(1);
-% t3 = times(channels==3,:)-t5(1);
-% t4 = times(channels==4,:)-t5(1);
-% t5 = t5-t5(1);
+t5 = times(channels==5,:);
+t1 = times(channels==1,:)-t5(1);
+t2 = times(channels==2,:)-t5(1);
+t3 = times(channels==3,:)-t5(1);
+t4 = times(channels==4,:)-t5(1);
+t5 = t5-t5(1);
 Nevents = length(times);
 
 pulse = zeros(Nevents,1);
@@ -261,7 +258,6 @@ distribution_window = [sum0_window',sum1_window',sum2_window',sum3_window'];
 figure;bar(distribution_window');
 title(['WITH TIMING WINDOW: CH1 (dark blue), CH2 (light blue), CH3 (green), CH4 (yellow)']);xlabel(['Pulse level']);ylabel(['Total counts in timing window']);
 
-
 % %sum1 = [sum(h1_0(655:692)),sum(h1_1(655:692)),sum(h1_2(655:692)),sum(h1_3(655:692))];
 % sum1 = [sum(h1_0(592:629)),sum(h1_1(592:629)),sum(h1_2(592:629)),sum(h1_3(592:629))];
 % sum2 = [sum(h2_0(704:741)),sum(h2_1(704:741)),sum(h2_2(704:741)),sum(h2_3(704:741))];
@@ -283,7 +279,7 @@ title(['WITH TIMING WINDOW: CH1 (dark blue), CH2 (light blue), CH3 (green), CH4 
 % total = total1 + total2 + total3 + total4;
 % deltat = double(clock-circshift(clock,1));
 % bins_selection = (min(deltat(2:end)):max(deltat(2:end)));
-% 
+
 % figure;plot(delta*clock,'.b');
 % title(['Arrival times of counter pulses as measured by IDQ box timer']);xlabel(['Event index']);ylabel(['Arrival time of counter pulses (s)']);
 % figure;plot(delta*deltat(2:end),'.b');
@@ -294,7 +290,7 @@ title(['WITH TIMING WINDOW: CH1 (dark blue), CH2 (light blue), CH3 (green), CH4 
 % title(['Channel 1 (red) and channel 2 (yellow)']);xlabel(['Detection counter time (s)']);ylabel(['Detection counter index']);
 % figure;plot(delta*ch3,(1:total3),'.g');hold on;plot(delta*ch4,(1:total4),'.b');hold off;
 % title(['Channel 3 (green) and channel 4 (blue)']);xlabel(['Detection counter time (s)']);ylabel(['Detection counter index']);
-% 
+
 % figure;hold on;
 % plot(1E9*delta*bins,h1,'oR');plot(1E9*delta*bins,h2,'oM');plot(1E9*delta*bins,h3,'oG');plot(1E9*delta*bins,h4,'oB');
 % hold off;xlim([40,60]);%ylim([0,max(h1)]);
@@ -325,7 +321,6 @@ title(['WITH TIMING WINDOW: CH1 (dark blue), CH2 (light blue), CH3 (green), CH4 
 % 
 % figure;bar(distribution');
 % title(['Regular sequence: ch1 (dark blue), ch2 (light blue), ch3 (yellow), ch4A (brown)']);xlabel(['Pulse level']);ylabel(['Total counts in detection window (2 or 3 ns)']);
-
 
 % %%% CALCULATE DARK COUNT RATE FOR EACH DETECTOR %%%%%%%%%%%%%%%%%%%
 % DarkCounts1 = 81E-12*(times_before(channels_before == 1) - alltimes(1));N1 = length(DarkCounts1);
