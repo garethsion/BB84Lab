@@ -1,4 +1,5 @@
-sum_windows = [sum0_window; sum1_window; sum2_window; sum3_window];
+%sum_windows = [sum0_window; sum1_window; sum2_window; sum3_window];
+sum_windows = normalised_distribution_window;
 pulse1_window = sum_windows(1,:);
 pulse2_window = sum_windows(2,:);
 pulse3_window = sum_windows(3,:);
@@ -37,16 +38,19 @@ pulse_percentages = [pulse1_percentages; pulse2_percentages;...
 %figure; bar(pulse_percentages)
 
 pulse1_ideal = [0, 0.25, 0.50, 0.25];
-pulse2_ideal = [0.125, 0.125, 0.25, 0.50];
-pulse3_ideal = [0.25, 0, 0.50, 0.25];
-pulse4_ideal = [0.125, 0.125, 0.50, 0.25];
+pulse2_ideal = [0.50, 0.25, 0, 0.25];
+pulse3_ideal = [0.25, 0, 0.25, 0.50];
+pulse4_ideal = [0.25, 0.50, 0.25, 0];
 ideal_pulses = [pulse1_ideal; pulse2_ideal; pulse3_ideal; pulse4_ideal];
-figure; bar(ideal_pulses); axis([0, 5, 0, 1]);
+%figure; bar(ideal_pulses); axis([0, 5, 0, 1]);
 
-a = (ideal_pulses(1,:) - pulse_percentages(1,:))*100;
-b = (ideal_pulses(2,:) - pulse_percentages(2,:))*100;
-c = (ideal_pulses(3,:) - pulse_percentages(3,:))*100;
-d = (ideal_pulses(4,:) - pulse_percentages(4,:))*100;
+a = (ideal_pulses(1,:)-pulse_percentages(1,:));
+b = (ideal_pulses(2,:)-pulse_percentages(2,:));
+c = (ideal_pulses(3,:)-pulse_percentages(3,:));
+d = (ideal_pulses(4,:)-pulse_percentages(4,:));
 
 ratio = [a;b;c;d];
-%figure; bar(ratio)
+figure;   
+bar(ratio);
+%hold on;
+%bar(pulse_percentages);
