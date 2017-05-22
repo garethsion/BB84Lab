@@ -30,8 +30,9 @@ normalised_distribution_window = [norm_dist_1; norm_dist_2; norm_dist_3;...
     norm_dist_4];
  %return normalised_distribion_window
 
-% % %%% NRMALISE PHOTON EVENTS IN TIMING WINDOW %%%%%%%%%%%%%%%%%%%
-% figure; bar(normalised_distribution_window)
-% title(['NORMALISED WITH TIMING WINDOW: CH1 (dark blue),'...
-%     'CH2 (light blue),CH3 (green), CH4 (yellow)']);
-% xlabel(['Pulse level']);ylabel(['Normalised total counts in timing window']);
+% %%% NRMALISE PHOTON EVENTS IN TIMING WINDOW %%%%%%%%%%%%%%%%%%%
+figure; bar(normalised_distribution_window')
+title(sprintf('NORMALISED WITH TIMING WINDOW:\n H (dark blue),V (light blue), L (green), R (yellow)', 'FontSize', 30));
+xlabel('Pulse level', 'FontSize', 28);
+ylabel('Normalised total counts in timing window', 'FontSize', 28);
+set(gca,'fontsize',24)

@@ -1,17 +1,30 @@
-times_before = alltimes(1:start-1);
-tbefore = delta*(times_before(end) - times_before(1));
-channels_before = allchannels(1:start-1);
+%%% Calculate Dark Counts %%%%%%%%%%%%%
 
-%%% CALCULATE DARK COUNT RATE FOR EACH DETECTOR %%%%%%%%%%%%%%%%%%%
-DarkCounts1 = 81E-12*(times_before(channels_before == 1) - alltimes(1));N1 = length(DarkCounts1);
-DarkCounts2 = 81E-12*(times_before(channels_before == 2) - alltimes(1));N2 = length(DarkCounts2);
-DarkCounts3 = 81E-12*(times_before(channels_before == 3) - alltimes(1));N3 = length(DarkCounts3);
-DarkCounts4 = 81E-12*(times_before(channels_before == 4) - alltimes(1));N4 = length(DarkCounts4);
-% DarkCounts1 = times(channels_after == 1);N1 = length(DarkCounts1)
-% DarkCounts2 = times(channels_after == 2);N2 = length(DarkCounts2)
-% DarkCounts3 = times(channels_after == 3);N3 = length(DarkCounts3)
-% DarkCounts4 = times(channels_after == 4);N4 = length(DarkCounts4)
-figure;plot(DarkCounts1,1:N1,'.b');hold on;
-plot(DarkCounts2,1:N2,'.r');
-plot(DarkCounts3,1:N3,'.g');
-plot(DarkCounts4,1:N4,'.m');hold off;
+distribution_sub = distribution_total - distribution_window
+%figure;bar(distribution_sub');
+%figure;bar(distribution_window');
+
+dark_count_ch1 = (sum(distribution_sub(1,:)))/5.5;
+dark_count_ch2 = (sum(distribution_sub(2,:)))/5.5;
+dark_count_ch3 = (sum(distribution_sub(3,:)))/5.5;
+dark_count_ch4 = (sum(distribution_sub(4,:)))/5.5;
+dark_counts = [dark_count_ch1, dark_count_ch2, dark_count_ch3,...
+    dark_count_ch4];
+figure;
+bar(dark_counts);
+title('Dark Counts in Each Channel', 'FontSize', 30);
+xlabel('Channel (H, V, L, R)', 'FontSize', 28)
+ylabel('Dark Counts', 'FontSize', 28);
+set(gca, 'FontSize', 24);
+
+%%% Normalise %%%%%%%%%%
+norm_dc1 = dark_count_ch1 / (dark_count_ch1 + dark_count_ch2 +... 
+    dark_count_ch3 + dark_count_ch4);
+norm_dc2 = dark_count_ch2 / (dark_count_ch1 + dark_count_ch2 +... 
+    dark_count_ch3 + dark_count_ch4);
+norm_dc3 = dark_count_ch3 / (dark_count_ch1 + dark_count_ch2 +... 
+    dark_count_ch3 + dark_count_ch4);
+norm_dc4 = dark_count_ch4 / (dark_count_ch1 + dark_count_ch2 +... 
+    dark_count_ch3 + dark_count_ch4);
+normalised_dark_counts = [norm_dc1, norm_dc2, norm_dc3, norm_dc4]
+figure;bar(normalised_dark_counts)

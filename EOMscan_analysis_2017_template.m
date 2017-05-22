@@ -1,6 +1,6 @@
-clc;
-close all;
-clear all;
+% clc;
+% close all;
+% clear all;
 
 %%% LOAD DATA FROM FILE %%%%%%%%%%%%%%%%%%%
 PathName = 'C:\Users\Gareth\Desktop\BB84Lab';
@@ -65,9 +65,11 @@ hold on;
 plot(V(:),CH2(:),'r', 'DisplayName', 'Vertical');
 plot(V(:),CH3(:),'g', 'DisplayName', 'Left');
 plot(V(:),CH4(:),'m', 'DisplayName', 'Right');
-legend('show');
+h_legend = legend('show');
 hold off;
-title('EOM Scan Data - Normalised', 'FontSize', 28);
-xlabel('EOM Voltage (V)', 'FontSize', 22);
-ylabel('Normalised Photon Counts', 'FontSize', 22);
+title('EOM Scan Data - Normalised', 'FontSize', 30);
+xlabel('EOM Voltage (V)', 'FontSize', 28);
+ylabel('Normalised Photon Counts', 'FontSize', 28);
 axis([-840, 820, 0, 1]);
+set(h_legend,'FontSize',22);
+set(gca,'fontsize',24)

@@ -242,7 +242,7 @@ sum2_total = [sum(h1_2),sum(h2_2),sum(h3_2),sum(h4_2)];
 sum3_total = [sum(h1_3),sum(h2_3),sum(h3_3),sum(h4_3)];
 distribution_total = [sum0_total',sum1_total',sum2_total',sum3_total'];
 figure;bar(distribution_total');
-title(['NO TIMING WINDOW: CH1 (dark blue), CH2 (light blue), CH3 (green), CH4 (yellow)']);xlabel(['Pulse level']);ylabel(['Total counts in entire pulse section']);
+title(['NO TIMING WINDOW: H (dark blue), V (light blue), L (green), R (yellow)']);xlabel(['Pulse level']);ylabel(['Total counts in entire pulse section']);
 
 %%% ADD UP ALL PHOTON EVENTS IN SPECIFIC SECTIONS OF PULSE (SELECTING TIMING WINDOW) %%%%%%%%%%%%%%%%%%%
 [Nmax,imax1] = max(h1_0);
@@ -256,7 +256,7 @@ sum2_window = [sum(h1_2(imax1-width:imax1+width)),sum(h2_2(imax2-width:imax2+wid
 sum3_window = [sum(h1_3(imax1-width:imax1+width)),sum(h2_3(imax2-width:imax2+width)),sum(h3_3(imax3-width:imax3+width)),sum(h4_3(imax4-width:imax4+width))];
 distribution_window = [sum0_window',sum1_window',sum2_window',sum3_window'];
 figure;bar(distribution_window');
-title(['WITH TIMING WINDOW: CH1 (dark blue), CH2 (light blue), CH3 (green), CH4 (yellow)']);xlabel(['Pulse level']);ylabel(['Total counts in timing window']);
+title(['WITH TIMING WINDOW: H (dark blue), V (light blue), L (green), R (yellow)']);xlabel(['Pulse level']);ylabel(['Total counts in timing window']);
 
 % %sum1 = [sum(h1_0(655:692)),sum(h1_1(655:692)),sum(h1_2(655:692)),sum(h1_3(655:692))];
 % sum1 = [sum(h1_0(592:629)),sum(h1_1(592:629)),sum(h1_2(592:629)),sum(h1_3(592:629))];
